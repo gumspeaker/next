@@ -5,19 +5,24 @@
   "main": "index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ./build.mjs"
+    "build": " tsc && rollup -c rollup.config.js"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
     "@types/react": "latest",
     "eslint": "^8.11.0",
     "eslint-config-next": "13.2.4",
+    "rollup": "^3.19.1",
     "typescript": "4.8.4"
   },
   "dependencies": {
-    "swr": "^2.1.0"
+    "sass": "^1.59.3",
+    "swr": "^2.1.0",
+    "jotai": "^2.0.3"
   },
   "peerDependencies": {
     "antd": "^5",

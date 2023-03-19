@@ -18,7 +18,7 @@ info  - Generating static pages (3/3)
 info  - Finalizing page optimization...
 
 Route (pages)                              Size     First Load JS
-┌ ○ / (455 ms)                             90.4 kB         164 kB
+┌ ○ / (507 ms)                             90.4 kB         164 kB
 ├   └ css/299b4710ca2a9192.css             1.87 kB
 ├   /_app                                  0 B            73.5 kB
 ├ ○ /404                                   182 B          73.7 kB
