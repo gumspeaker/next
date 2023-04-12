@@ -1,11 +1,4 @@
-import { Form, Input } from "antd";
 const PageForm = () => {
-  return (
-    <>
-      <Form>
-        <Input></Input>
-      </Form>
-    </>
-  );
+  return <></>;
 };
 export default PageForm;

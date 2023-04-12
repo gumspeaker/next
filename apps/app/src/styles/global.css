@@ -1,0 +1,5 @@
+/* // ./styles/global.css */
+@tailwind base;
+@tailwind components;
+/* // Add Tailwind's @apply styles here */
+@tailwind utilities;
