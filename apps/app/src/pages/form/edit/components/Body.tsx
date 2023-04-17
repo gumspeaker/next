@@ -1,8 +1,16 @@
-import Head from "next/head";
-import { Inter } from "next/font/google";
-import Demo from "@demo/page-form";
-const inter = Inter({ subsets: ["latin"] });
+import { FC } from "react";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
 
-export default function Home() {
-  return <div>11111</div>;
+function App() {
+  const methods = useFormContext();
+  return <form onSubmit={methods.handleSubmit(() => {})}></form>;
+}
+// type
+export default function Wrapper({ children }) {
+  const methods = useForm();
+  return (
+    <FormProvider {...methods}>
+      <App></App>
+    </FormProvider>
+  );
 }
