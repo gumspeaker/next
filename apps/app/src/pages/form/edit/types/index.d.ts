@@ -3,6 +3,9 @@ export type FormType = {
   version: string;
   form: {};
 };
+export type FormTypeField = {
+  field_name: string;
+};
 export enum FormComponentEnum {
   INPUT = "input",
   SELECT = "select",

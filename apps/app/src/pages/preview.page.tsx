@@ -18,14 +18,15 @@ export default function Wrapper<VALUES extends defaultValues>(
 ) {
   const { onSubmit = noon, defaultValues } = props;
   const methods = useForm<VALUES>({ defaultValues });
+  const submit = methods.handleSubmit(onSubmit);
   return (
     <FormProvider {...methods}>
-      <FormContainer></FormContainer>
+      <App></App>
     </FormProvider>
   );
 }
 
-function FormContainer() {
+function App() {
   const methods = useFormContext();
-  return <form onSubmit={methods.handleSubmit(() => {})}>111</form>;
+  return <form onSubmit={methods.handleSubmit(() => {})}></form>;
 }

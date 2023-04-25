@@ -4,7 +4,7 @@ import { ComponentList, Right, Body } from "./components";
 
 export default function Home() {
   return (
-    <div className="flex w-screen h-screen">
+    <div className="flex flex-row w-screen h-screen">
       <ComponentList />
       <Body />
       <Right />
