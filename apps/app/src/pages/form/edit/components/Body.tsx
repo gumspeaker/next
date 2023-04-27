@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Droppable } from "react-beautiful-dnd";
 import {
   useForm,
   FormProvider,
@@ -20,12 +21,16 @@ export default function Wrapper<VALUES extends defaultValues>(
   const methods = useForm<VALUES>({ defaultValues });
   return (
     <FormProvider {...methods}>
-      <FormContainer></FormContainer>
+      <Droppable droppableId="body">
+        {() => {
+          return <FormContainer></FormContainer>;
+        }}
+      </Droppable>
     </FormProvider>
   );
 }
 
 function FormContainer() {
   const methods = useFormContext();
-  return <form onSubmit={methods.handleSubmit(() => {})}>111</form>;
+  return <form onSubmit={methods.handleSubmit(() => {})}></form>;
 }

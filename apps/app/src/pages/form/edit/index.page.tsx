@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
 import { ComponentList, Right, Body } from "./components";
+import {
+  DragDropContext,
+  OnDragEndResponder,
+  resetServerContext,
+} from "react-beautiful-dnd";
 import dynamic from "next/dynamic";
 export const ComponentDragArea = "ComponentDragArea";
 function Context() {
@@ -9,9 +14,16 @@ function Context() {
   };
   return (
     <div className="flex flex-row w-screen h-screen">
-      <ComponentList />
-      <Body />
-      <Right />
+      <DragDropContext onDragEnd={onDragEnd}>
+        <ComponentList />
+        <Body />
+        <Right />
+      </DragDropContext>
     </div>
   );
 }
+export const getServerSideProps = async () => {
+  resetServerContext();
+  return { props: { data: [] } };
+};
+export default Context;
