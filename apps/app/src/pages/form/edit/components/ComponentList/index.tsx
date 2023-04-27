@@ -10,6 +10,7 @@ import {
 import style from "./index.module.scss";
 import React, { FC, ComponentProps } from "react";
 import { ComponentDragArea } from "../../index.page";
+import { useDrag } from "react-dnd";
 type DragItem = {
   type: string;
   body: React.ReactNode;
@@ -64,17 +65,15 @@ export default function Home() {
 }
 
 type Props = ComponentProps<typeof Paper> & {
-  key: string;
   dragItem: DragItem;
   index: number;
 };
 const DragPaper: FC<Props> = (props) => {
-  const { key, children, dragItem, index, ...rest } = props;
+  const { children, dragItem, index, ...rest } = props;
+  const [collected, drag, dragPreview] = useDrag({});
   return (
-    <React.Fragment key={key}>
-      <div>
-        <Paper {...rest}>{children}</Paper>
-      </div>
-    </React.Fragment>
+    <div>
+      <Paper {...rest}>{children}</Paper>
+    </div>
   );
 };
