@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import style from "./index.module.scss";
 import React, { FC, ComponentProps } from "react";
-import { Draggable } from "react-beautiful-dnd";
+import { ComponentDragArea } from "../../index.page";
 type DragItem = {
   type: string;
   body: React.ReactNode;
@@ -39,25 +39,27 @@ export default function Home() {
     },
     {
       type: "Rating",
-      body: <Rating max={3} />,
+      body: <Rating disabled max={3} />,
     },
   ];
   return (
-    <div className="w-1/3 flex-grow-0">
-      <Box className="flex flex-wrap overflow-scroll max-h-full">
-        {list.map((dragItem, index) => (
-          <DragPaper
-            index={index}
-            dragItem={dragItem}
-            key={dragItem.type}
-            className={`${style.paper} flex justify-center items-center`}
-            elevation={1}
-          >
-            {dragItem.body}
-          </DragPaper>
-        ))}
+    <Box className="w-1/4 flex-grow-0 h-full">
+      <Box className="overflow-scroll min-h-full">
+        <div className="w-full">
+          {list.map((dragItem, index) => (
+            <DragPaper
+              index={index}
+              dragItem={dragItem}
+              key={dragItem.type}
+              className={`${style.paper} flex justify-center items-center`}
+              elevation={1}
+            >
+              {dragItem.body}
+            </DragPaper>
+          ))}
+        </div>
       </Box>
-    </div>
+    </Box>
   );
 }
 
@@ -69,18 +71,10 @@ type Props = ComponentProps<typeof Paper> & {
 const DragPaper: FC<Props> = (props) => {
   const { key, children, dragItem, index, ...rest } = props;
   return (
-    <Draggable index={index} draggableId={dragItem.type}>
-      {(provided, snapshot) => {
-        return (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-          >
-            <Paper {...rest}>{children}</Paper>
-          </div>
-        );
-      }}
-    </Draggable>
+    <React.Fragment key={key}>
+      <div>
+        <Paper {...rest}>{children}</Paper>
+      </div>
+    </React.Fragment>
   );
 };

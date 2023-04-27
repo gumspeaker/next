@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  pageExtensions: ["page.tsx", "page.ts"],
+  reactStrictMode: false,
+  pageExtensions: ["page.tsx", "page.ts", "page.jsx"],
   experimental: {
     transpilePackages: ["@demo/page-form"],
   },

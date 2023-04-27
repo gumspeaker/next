@@ -1,19 +1,17 @@
 "use client";
 import React from "react";
 import { ComponentList, Right, Body } from "./components";
-import { DragDropContext, OnDragEndResponder } from "react-beautiful-dnd";
-
-export default function Home() {
+import dynamic from "next/dynamic";
+export const ComponentDragArea = "ComponentDragArea";
+function Context() {
   const onDragEnd: OnDragEndResponder = (...args) => {
     console.log(args);
   };
   return (
     <div className="flex flex-row w-screen h-screen">
-      <DragDropContext onDragEnd={onDragEnd}>
-        <ComponentList />
-        <Body />
-        <Right />
-      </DragDropContext>
+      <ComponentList />
+      <Body />
+      <Right />
     </div>
   );
 }
