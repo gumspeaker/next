@@ -3,6 +3,7 @@ import React from "react";
 import { ComponentList, Right, FormContext } from "./components";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import dynamic from "next/dynamic";
 export const ComponentDragArea = "ComponentDragArea";
 function Context() {
   const dragEndHandle = (e: DragEndEvent) => {
@@ -18,4 +19,4 @@ function Context() {
     </div>
   );
 }
-export default Context;
+export default dynamic(Promise.resolve(Context), { ssr: false });

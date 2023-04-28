@@ -43,13 +43,16 @@ function FormContainer() {
     background: "white",
   };
   const [formValue] = useAtom(formData);
+  console.log(formValue);
+
   return (
     <form onSubmit={methods.handleSubmit(() => {})}>
       <div ref={setNodeRef} style={style} className="h-full">
         <SortableContext
+          id="body"
           items={[
             ...formValue.form.map((f) => f.filed_id),
-            ...comList.map((c) => c.type),
+            // ...comList.map((c) => c.type),
           ]}
         >
           {formValue.form.map((item) => (
