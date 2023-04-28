@@ -1,4 +1,4 @@
-import Body from "./Body";
+import FormContext from "./FormContext";
 import ComponentList from "./ComponentList";
 import Right from "./Right";
-export { Body, ComponentList, Right };
+export { FormContext, ComponentList, Right };

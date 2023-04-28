@@ -10,44 +10,52 @@ import {
 import style from "./index.module.scss";
 import React, { FC, ComponentProps } from "react";
 import { ComponentDragArea } from "../../index.page";
-import { useDrag } from "react-dnd";
+import { useDraggable, useDroppable } from "@dnd-kit/core";
 type DragItem = {
   type: string;
   body: React.ReactNode;
 };
+
+export const comList: DragItem[] = [
+  {
+    type: "button",
+    body: (
+      <Button disabled variant="outlined">
+        button
+      </Button>
+    ),
+  },
+  {
+    type: "RadioGroup",
+    body: (
+      <RadioGroup>
+        <FormControlLabel
+          disabled
+          value="radio"
+          control={<Radio />}
+          label="radio"
+        />
+      </RadioGroup>
+    ),
+  },
+  {
+    type: "Rating",
+    body: <Rating disabled max={3} />,
+  },
+];
 export default function Home() {
-  const list: DragItem[] = [
-    {
-      type: "button",
-      body: (
-        <Button disabled variant="outlined">
-          button
-        </Button>
-      ),
-    },
-    {
-      type: "RadioGroup",
-      body: (
-        <RadioGroup>
-          <FormControlLabel
-            disabled
-            value="radio"
-            control={<Radio />}
-            label="radio"
-          />
-        </RadioGroup>
-      ),
-    },
-    {
-      type: "Rating",
-      body: <Rating disabled max={3} />,
-    },
-  ];
+  const { isOver, setNodeRef } = useDroppable({
+    id: "list",
+  });
+  const css = {
+    color: isOver ? "green" : undefined,
+  };
+
   return (
-    <Box className="w-1/4 flex-grow-0 h-full">
-      <Box className="overflow-scroll min-h-full">
-        <div className="w-full">
-          {list.map((dragItem, index) => (
+    <div className="w-1/4 flex-grow-0 h-full">
+      <div className="overflow-scroll-y min-h-full w-full">
+        <div className="w-full" style={css} ref={setNodeRef}>
+          {comList.map((dragItem, index) => (
             <DragPaper
               index={index}
               dragItem={dragItem}
@@ -59,8 +67,8 @@ export default function Home() {
             </DragPaper>
           ))}
         </div>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 
@@ -70,10 +78,19 @@ type Props = ComponentProps<typeof Paper> & {
 };
 const DragPaper: FC<Props> = (props) => {
   const { children, dragItem, index, ...rest } = props;
-  const [collected, drag, dragPreview] = useDrag({});
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: dragItem.type,
+  });
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
   return (
-    <div>
-      <Paper {...rest}>{children}</Paper>
-    </div>
+    <>
+      <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+        <Paper {...rest}>{children}</Paper>
+      </div>
+    </>
   );
 };

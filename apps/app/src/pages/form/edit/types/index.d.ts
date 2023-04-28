@@ -1,10 +1,9 @@
 export type FormType = {
-  id: string;
-  version: string;
-  form: {};
+  form: FormField[];
 };
-export type FormTypeField = {
+export type FormField = {
   field_name: string;
+  filed_id: string;
 };
 export enum FormComponentEnum {
   INPUT = "input",
