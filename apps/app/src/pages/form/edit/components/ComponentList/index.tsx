@@ -9,8 +9,6 @@ import {
 } from "@mui/material";
 import style from "./index.module.scss";
 import React, { FC, ComponentProps } from "react";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import { ComponentDragArea } from "../../index.page";
 type DragItem = {
   type: string;
   body: React.ReactNode;
@@ -72,31 +70,10 @@ type Props = ComponentProps<typeof Paper> & {
 const DragPaper: FC<Props> = (props) => {
   const { children, dragItem, index, ...rest } = props;
   return (
-    <Droppable key={dragItem.type} droppableId={dragItem.type + "drop"}>
-      {(provided) => (
-        <div ref={provided.innerRef} {...provided.droppableProps}>
-          <Draggable
-            key={dragItem.type}
-            index={index}
-            draggableId={dragItem.type + "drag"}
-          >
-            {(provided, snapshot) => {
-              return (
-                <>
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <Paper {...rest}>{children}</Paper>
-                  </div>
-                </>
-              );
-            }}
-          </Draggable>
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
+    <>
+      <div>
+        <Paper {...rest}>{children}</Paper>
+      </div>
+    </>
   );
 };
